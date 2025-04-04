@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: test
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop  # 🚀 테스트 끝나면 테이블 자동 삭제
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true  # SQL 쿼리 출력
