@@ -65,7 +65,6 @@ class CouponServiceTest {
                 }
             });
         }
-
         latch.await();
 
         Coupon coupon = couponRepository.findById(1L).orElseThrow();
