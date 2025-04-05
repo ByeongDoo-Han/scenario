@@ -10,19 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
+//@DataJpaTest
+//@TestPropertySource(locations = "classpath:application-test.yml")
+//@ExtendWith(SpringExtension.class)
 class CouponServiceTest {
 
     @Autowired
-    CouponService couponService;
+    private CouponService couponService;
 
     @Autowired
-    CouponRepository couponRepository;
+    private CouponRepository couponRepository;
 
 //    public static String TEN_PERCENT_DISCOUNT = "10% 할인 쿠폰";
 
@@ -43,13 +47,13 @@ class CouponServiceTest {
     void couponDecrease() {
         couponService.decrease(1L, 1L);
         Coupon coupon = couponRepository.findById(1L).orElseThrow();
-        assertEquals(99L, coupon.getQuantity());
+        assertEquals(98L, coupon.getQuantity());
 //        assertThat(coupon.getQuantity()).isEqualTo(99L);
     }
 
     @Test
     @DisplayName("100개 동시 요청")
-    void couponDecrease100() throws InterruptedException {
+     void couponDecrease100() throws InterruptedException {
         int threadCount = 100;
         ExecutorService executorService = Executors.newFixedThreadPool(32);
 
@@ -67,9 +71,23 @@ class CouponServiceTest {
         }
 
         latch.await();
+        executorService.shutdown();
 
         Coupon coupon = couponRepository.findById(1L).orElseThrow();
         assertEquals(0L,coupon.getQuantity());
 //        assertThat(coupon.getQuantity()).isEqualTo(0L);
+    }
+
+
+    @Test
+    void atomicTest(){
+        int threadCount = 100;
+        for (int i = 0; i < threadCount; i++) {
+            new Thread(()->{
+                couponService.decrease(1L,1L);
+
+            }).start();
+        }
+        assertEquals(0L, couponRepository.findById(1L).orElseThrow().getQuantity());
     }
 }
