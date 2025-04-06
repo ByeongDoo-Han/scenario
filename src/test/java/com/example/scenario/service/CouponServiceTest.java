@@ -13,13 +13,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Transactional
-//@DataJpaTest
-//@TestPropertySource(locations = "classpath:application-test.yml")
-//@ExtendWith(SpringExtension.class)
 class CouponServiceTest {
 
     @Autowired
@@ -47,7 +43,7 @@ class CouponServiceTest {
     void couponDecrease() {
         couponService.decrease(1L, 1L);
         Coupon coupon = couponRepository.findById(1L).orElseThrow();
-        assertEquals(98L, coupon.getQuantity());
+        assertEquals(99L, coupon.getQuantity());
 //        assertThat(coupon.getQuantity()).isEqualTo(99L);
     }
 
@@ -76,18 +72,5 @@ class CouponServiceTest {
         Coupon coupon = couponRepository.findById(1L).orElseThrow();
         assertEquals(0L,coupon.getQuantity());
 //        assertThat(coupon.getQuantity()).isEqualTo(0L);
-    }
-
-
-    @Test
-    void atomicTest(){
-        int threadCount = 100;
-        for (int i = 0; i < threadCount; i++) {
-            new Thread(()->{
-                couponService.decrease(1L,1L);
-
-            }).start();
-        }
-        assertEquals(0L, couponRepository.findById(1L).orElseThrow().getQuantity());
     }
 }

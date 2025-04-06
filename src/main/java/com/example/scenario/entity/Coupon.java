@@ -11,20 +11,20 @@ import lombok.Getter;
 @Entity
 @Getter
 @AllArgsConstructor
-public class Coupon{
+public class Coupon {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String couponName;
     private Long quantity;
 
     @Builder
-    public Coupon() {
-
+    public Coupon(){
     }
 
-    public void decrease(Long quantity){
-        if(this.quantity - quantity < 0){
+
+    public void decrease(Long quantity) {
+        if (this.quantity - quantity < 0) {
             throw new RuntimeException("쿠폰 재고가 부족합니다.");
         }
         this.quantity -= quantity;

@@ -13,8 +13,7 @@ import java.util.NoSuchElementException;
 public class CouponService {
     private final CouponRepository couponRepository;
 
-    @Transactional
-    public void decrease(final Long id, final Long quantity){
+    public synchronized void decrease(final Long id, final Long quantity){
         Coupon coupon = couponRepository.findById(id).orElseThrow(
             () -> new NoSuchElementException("존재하지 않는 쿠폰입니다.")
         );
