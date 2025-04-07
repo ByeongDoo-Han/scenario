@@ -1,6 +1,6 @@
 spring:
-  profiles:
-    active: test
+  application:
+    name: scenario
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${DB_URL}
@@ -10,8 +10,8 @@ spring:
     hibernate:
       ddl-auto: create # 🚀 테스트 끝나면 테이블 자동 삭제
     show-sql: true
-logging:
-  level:
-    org:
-      hibernate:
-        SQL:DEBUG
+    database: postgresql
+
+#logging:
+#  level:
+#    org.hibernate.SQL: debug
