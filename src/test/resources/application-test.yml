@@ -8,8 +8,8 @@ spring:
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: create # 🚀 테스트 끝나면 테이블 자동 삭제
-    show-sql: true
+      ddl-auto: create-drop # 🚀 테스트 끝나면 테이블 자동 삭제
+    show-sql: false
     database: postgresql
 
 #logging:

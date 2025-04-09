@@ -29,7 +29,7 @@ class CouponServiceTest {
 
     @BeforeEach
     void before(){
-        Coupon coupon = new Coupon(1L,"10퍼 할인 쿠폰", 100L);
+        Coupon coupon = new Coupon(1L,"10퍼 할인 쿠폰", 1000L);
         couponRepository.saveAndFlush(coupon);
         System.out.println("쿠폰 저장");
     }
@@ -39,23 +39,23 @@ class CouponServiceTest {
     void couponDecrease() {
         couponService.decrease(1L, 1L);
         Coupon coupon = couponRepository.findById(1L).orElseThrow();
-        assertEquals(99L, coupon.getQuantity());
+        assertEquals(999L, coupon.getQuantity());
     }
 
     @Test
     @DisplayName("100개 동시 요청")
      void couponDecrease100() throws InterruptedException {
-        int threadCount = 100;
-        ExecutorService executorService = Executors.newFixedThreadPool(32);
+        int threadCount = 1000;
+        ExecutorService executorService = Executors.newFixedThreadPool(1000);
 
         CountDownLatch latch = new CountDownLatch(threadCount);
 
+        long start = System.currentTimeMillis();
         for (int i = 0; i < threadCount; i++) {
             executorService.submit(()->{
                 try{
                     couponService.decrease(1L,1L);
-                }
-                finally {
+                } finally {
                     latch.countDown();
                 }
             });
@@ -63,8 +63,9 @@ class CouponServiceTest {
 
         latch.await();
         executorService.shutdown();
-
+        long end = System.currentTimeMillis();
         Coupon coupon = couponRepository.findById(1L).orElseThrow();
         assertEquals(0L,coupon.getQuantity());
+        System.out.println("실행 시간: "+(end-start)+" ms");
     }
 }
