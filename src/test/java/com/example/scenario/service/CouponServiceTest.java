@@ -60,7 +60,6 @@ class CouponServiceTest {
                 }
             });
         }
-
         latch.await();
         executorService.shutdown();
         long end = System.currentTimeMillis();
