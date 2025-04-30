@@ -11,3 +11,8 @@ spring:
       ddl-auto: update
     show-sql: false
     database: postgresql
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
