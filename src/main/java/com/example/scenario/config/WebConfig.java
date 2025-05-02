@@ -12,6 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
         cors.addMapping("/**")
             .allowedOrigins("http://localhost:5173")
             .allowedOrigins("http://localhost:80")
+            .allowedOrigins("http://localhost:8080")
             .allowedMethods("GET", "POST")
             .allowedHeaders("*")
             .allowCredentials(true);
