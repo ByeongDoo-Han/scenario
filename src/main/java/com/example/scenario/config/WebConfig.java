@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
             .allowedOrigins("http://localhost:5173")
             .allowedOrigins("http://localhost:80")
             .allowedOrigins("http://localhost:8080")
+            .allowedOrigins("http://localhost")
             .allowedMethods("GET", "POST")
             .allowedHeaders("*")
             .allowCredentials(true);
