@@ -14,6 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
             .allowedOrigins("http://localhost:80")
             .allowedOrigins("http://localhost:8080")
             .allowedOrigins("http://localhost")
+            .allowedOrigins("https://scenario-front-phi.vercel.app/")
             .allowedMethods("GET", "POST")
             .allowedHeaders("*")
             .allowCredentials(true);
