@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +31,10 @@ public class CouponService {
 
     public Coupon createCoupon() {
         couponRepository.deleteAll();
+        Random random = new Random();
+        long randomLong = random.nextLong();
         Coupon coupon = Coupon.builder()
-            .quantity(10L)
+            .quantity(randomLong)
             .couponName("싸이 콘서트")
             .build();
         couponRepository.save(coupon);
