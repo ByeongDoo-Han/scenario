@@ -20,7 +20,7 @@ public class Course {
     private Long id;
     private String code;
     private String name;
-    private int quantity;
+    private Long quantity;
     private String professor;
     private static final List<String> COURSE_LIST = Arrays.asList(
         "데이터베이스 시스템",
@@ -55,11 +55,11 @@ public class Course {
 
     private static final Random RANDOM = new Random();
 
-    public String getRandomCourse() {
+    public String setRandomCourse() {
         return COURSE_LIST.get(RANDOM.nextInt(COURSE_LIST.size()));
     }
 
-    public String getRandomProfessor(){
+    public String setRandomProfessor(){
         Character a = FIRST_NAME_LIST.get(RANDOM.nextInt(FIRST_NAME_LIST.size()));
         Character b = SECOND_NAME_LIST.get(RANDOM.nextInt(SECOND_NAME_LIST.size()));
         Character c = FINAL_NAME_LIST.get(RANDOM.nextInt(FINAL_NAME_LIST.size()));
@@ -73,19 +73,19 @@ public class Course {
         this.quantity -= quantity;
     }
 
-    public String getCode(){
-        return "C0" + RANDOM.nextInt(99);
+    public String setCode(){
+        return "C0" + String.valueOf(RANDOM.nextInt(99));
     }
 
-    public int getQuantity(){
-        return RANDOM.nextInt(99);
+    public Long setQuantity(){
+        return RANDOM.nextLong(1L,20L);
     }
 
     @Builder
     public Course(){
-        this.code = getCode();
-        this.name = getRandomCourse();
-        this.quantity = getQuantity();
-        this.professor = getRandomProfessor();
+        this.code = setCode();
+        this.name = setRandomCourse();
+        this.quantity = setQuantity();
+        this.professor = setRandomProfessor();
     }
 }

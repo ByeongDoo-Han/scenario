@@ -32,9 +32,8 @@ public class CouponService {
     public Coupon createCoupon() {
         couponRepository.deleteAll();
         Random random = new Random();
-        long randomLong = random.nextLong();
         Coupon coupon = Coupon.builder()
-            .quantity(randomLong)
+            .quantity(random.nextLong(20L))
             .couponName("싸이 콘서트")
             .build();
         couponRepository.save(coupon);

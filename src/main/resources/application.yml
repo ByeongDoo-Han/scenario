@@ -11,6 +11,8 @@ spring:
       ddl-auto: update
     show-sql: false
     database: postgresql
+  elasticsearch:
+    uris: http://localhost:9200
 management:
   endpoints:
     web:
