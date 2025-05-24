@@ -13,8 +13,14 @@ spring:
     database: postgresql
   elasticsearch:
     uris: http://localhost:9200
+  main:
+    allow-bean-definition-overriding: true
 management:
   endpoints:
     web:
       exposure:
         include: health
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
