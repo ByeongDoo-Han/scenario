@@ -27,5 +27,8 @@ public class SearchController {
         searchService.save(product);
     }
 
-
+    @GetMapping("/search/all")
+    public ResponseEntity<List<String>> searchAll(){
+        return searchService.searchAll();
+    }
 }

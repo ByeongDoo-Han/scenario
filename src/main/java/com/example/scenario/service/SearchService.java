@@ -3,19 +3,24 @@ package com.example.scenario.service;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import com.example.scenario.entity.Product;
 import com.example.scenario.repository.ProductRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class SearchService {
     private final ProductRepository productRepository;
-
+    private final WebClient webClient;
     public ResponseEntity<List<Product>> search(String keyword) {
         return ResponseEntity.ok(productRepository.findByTitle(keyword));
     }
@@ -24,4 +29,29 @@ public class SearchService {
         productRepository.save(product);
     }
 
+    public ResponseEntity<List<String>> searchAll() {
+        String url = "http://localhost:9200/products/_search?size=1000&pretty";
+
+        String response = webClient.get()
+            .uri(url)
+            .retrieve()
+            .bodyToMono(String.class)
+            .block();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response);
+
+            List<String> titles = new ArrayList<>();
+            for(JsonNode hit : root.path("hits").path("hits")){
+                String title = hit.path("_source").path("title").asText();
+                titles.add(title);
+            }
+            return ResponseEntity.ok(titles);
+        } catch (Exception e){
+            throw new RuntimeException("Elasticsearch 파싱 실패", e);
+        }
+
+
+    }
 }
