@@ -14,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @Service
@@ -29,7 +30,7 @@ public class SearchService {
         productRepository.save(product);
     }
 
-    public ResponseEntity<List<String>> searchAll() {
+    public ResponseEntity<List<Product>> searchAll() {
         String url = "http://localhost:9200/products/_search?size=1000&pretty";
 
         String response = webClient.get()
@@ -37,21 +38,35 @@ public class SearchService {
             .retrieve()
             .bodyToMono(String.class)
             .block();
-
+        System.out.println(response);
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(response);
 
             List<String> titles = new ArrayList<>();
-            for(JsonNode hit : root.path("hits").path("hits")){
+            List<String> ids = new ArrayList<>();
+            List<Product> products = new ArrayList<>();
+            for (JsonNode hit : root.path("hits").path("hits")) {
+                String id = hit.path("_id").asText();
                 String title = hit.path("_source").path("title").asText();
-                titles.add(title);
+                Product product = new Product(id, title);
+                products.add(product);
             }
-            return ResponseEntity.ok(titles);
-        } catch (Exception e){
+
+            return ResponseEntity.ok(products);
+        } catch (Exception e) {
             throw new RuntimeException("Elasticsearch 파싱 실패", e);
         }
+    }
 
+    public void deleteById(final String id) {
+        if(productRepository.findById(id).isEmpty()) return;
+        productRepository.deleteById(id);
+        System.out.println(id + " 삭제");
+    }
 
+    public void deleteByTitle(final String title) {
+
+        productRepository.deleteByTitle(title);
     }
 }

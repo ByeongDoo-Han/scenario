@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
                 "https://www.dewdew.site",
                 "https://dewdew.site"
             )
-            .allowedMethods("GET", "POST")
+            .allowedMethods("GET", "POST", "DELETE")
             .allowedHeaders("*")
             .allowCredentials(true);
     }

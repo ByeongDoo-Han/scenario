@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends ElasticsearchRepository<Product, String> {
     List<Product> findByTitle(String keyword);
+    void deleteByTitle(String title);
 }

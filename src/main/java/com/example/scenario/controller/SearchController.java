@@ -22,13 +22,23 @@ public class SearchController {
         return searchService.search(q);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/search/save")
     public void save(@RequestBody Product product) {
         searchService.save(product);
     }
 
     @GetMapping("/search/all")
-    public ResponseEntity<List<String>> searchAll(){
+    public ResponseEntity<List<Product>> searchAll(){
         return searchService.searchAll();
+    }
+
+    @DeleteMapping("/search/delete")
+    public void deleteById(@RequestParam final String id){
+        searchService.deleteById(id);
+    }
+
+    @DeleteMapping("/search/delete/{title}")
+    public void deleteByTitle(@PathVariable String title){
+        searchService.deleteByTitle(title);
     }
 }
