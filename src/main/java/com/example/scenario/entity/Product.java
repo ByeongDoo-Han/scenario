@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 @Document(indexName = "products")
 @NoArgsConstructor
 @Getter
+@Setting(settingPath = "/elasticsearch/settings/product-settings.json")
 public class Product {
 
     @Id
