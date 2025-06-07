@@ -4,7 +4,7 @@
 APP_NAME=scenario-backend
 BLUE_PORT=8081
 GREEN_PORT=8082
-EC2_HOST=13.125.236.97  # 또는 ec2 인스턴스 ip
+EC2_HOST=13.124.134.116  # 또는 ec2 인스턴스 ip
 JAR_PATH=./build/libs/*.jar
 
 # 현재 실행 중인 포트 확인
