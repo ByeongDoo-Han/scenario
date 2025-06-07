@@ -12,7 +12,7 @@ spring:
     show-sql: false
     database: postgresql
   elasticsearch:
-    uris: http://localhost:9200
+    uris: http://elasticsearch:9200
   main:
     allow-bean-definition-overriding: true
 management:
