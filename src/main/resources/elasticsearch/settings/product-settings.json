@@ -24,6 +24,7 @@
           ]
         },
         "ngram_search_analyzer": {
+          "type": "custom",
           "tokenizer": "standard",
           "filter": [
             "lowercase"
