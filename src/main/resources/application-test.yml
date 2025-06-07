@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: scenario
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database: postgresql
+  elasticsearch:
+    uris: http://localhost:9200
+  main:
+    allow-bean-definition-overriding: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
