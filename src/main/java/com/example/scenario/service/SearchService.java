@@ -31,7 +31,7 @@ public class SearchService {
     }
 
     public ResponseEntity<List<Product>> searchAll() {
-        String url = "http://localhost:9200/products/_search?size=1000&pretty";
+        String url = "http://elasticsearch:9200/products/_search?size=1000&pretty";
 
         String response = webClient.get()
             .uri(url)

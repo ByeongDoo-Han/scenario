@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
                 "http://localhost:5173",
                 "http://localhost:80",
                 "http://localhost:8080",
+                "http://localhost:9200",
                 "http://localhost",
                 "https://scenario-front-phi.vercel.app",
                 "https://www.dewdew.site",
