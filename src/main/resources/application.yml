@@ -16,7 +16,7 @@ spring:
   data:
     elasticsearch:
       repositories:
-        enabled: false
+        enabled: true
   main:
     allow-bean-definition-overriding: true
 management:

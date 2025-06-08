@@ -9,26 +9,17 @@
           "type": "ngram",
           "min_gram": 1,
           "max_gram": 9,
-          "token_chars": [
-            "letter",
-            "digit"
-          ]
+          "token_chars": ["letter", "digit"]
         }
       },
       "analyzer": {
         "ngram_analyzer": {
-          "type": "custom",
           "tokenizer": "ngram_tokenizer",
-          "filter": [
-            "lowercase"
-          ]
+          "filter": ["lowercase"]
         },
         "ngram_search_analyzer": {
-          "type": "custom",
           "tokenizer": "standard",
-          "filter": [
-            "lowercase"
-          ]
+          "filter": ["lowercase"]
         }
       }
     }
