@@ -5,31 +5,22 @@
     },
     "analysis": {
       "tokenizer": {
-        "ngram_tokenizer": {
-          "type": "ngram",
-          "min_gram": 1,
+        "edge_ngram_tokenizer": {
+          "type": "edge_ngram",
+          "min_gram": 2,
           "max_gram": 9,
-          "token_chars": ["letter", "digit"]
+          "token_chars": ["letter", "digit", "hangul"]   // hangul 추가
         }
       },
       "analyzer": {
         "ngram_analyzer": {
-          "tokenizer": "ngram_tokenizer",
+          "tokenizer": "edge_ngram_tokenizer",
           "filter": ["lowercase"]
         },
-        "ngram_search_analyzer": {
-          "tokenizer": "standard",
+        "standard_lowercase_analyzer": {
+          "tokenizer": "edge_ngram_tokenizer",
           "filter": ["lowercase"]
         }
-      }
-    }
-  },
-  "mappings": {
-    "properties": {
-      "title": {
-        "type": "text",
-        "analyzer": "ngram_analyzer",
-        "search_analyzer": "ngram_search_analyzer"
       }
     }
   }
