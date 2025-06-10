@@ -13,6 +13,10 @@ spring:
     database: postgresql
   elasticsearch:
     uris: http://localhost:9200
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
   main:
     allow-bean-definition-overriding: true
 management:
