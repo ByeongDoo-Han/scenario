@@ -1,46 +1,38 @@
 {
-  "settings": {
+
     "index": {
-      "max_ngram_diff": 20
+      "max_ngram_diff": 19
     },
     "analysis": {
       "tokenizer": {
-        "nori_tokenizer": {
-          "type": "nori_tokenizer",
-          "decompound_mode": "mixed"
-        }
-      },
-      "filter":{
-        "ngram_filter": {
+        "autocomplete_tokenizer": {
           "type": "ngram",
           "min_gram": 1,
-          "max_gram": 10
+          "max_gram": 9,
+          "token_chars": [
+            "letter",
+            "digit",
+            "whitespace"
+          ]
         }
       },
       "analyzer": {
-        "ngram_analyzer": {
-          "tokenizer": "nori_tokenizer",
-          "filter": ["lowercase", "ngram_filter"]
+        "autocomplete": {
+          "type": "custom",
+          "tokenizer": "autocomplete_tokenizer",
+          "filter": [
+            "lowercase"
+          ]
         },
-        "ngram_search_analyzer": {
-          "tokenizer": "nori_tokenizer",
-          "filter": ["lowercase"]
-        }
-      }
-    }
-  },
-  "mappings": {
-    "properties": {
-      "title": {
-        "type": "text",
-        "analyzer": "ngram_analyzer",
-        "search_analyzer": "ngram_search_analyzer",
-        "fields": {
-          "suggest": {
-            "type": "completion"
-          }
+        "autocomplete_search": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase"
+          ]
         }
       }
     }
   }
-}
+
+
