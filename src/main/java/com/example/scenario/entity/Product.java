@@ -18,7 +18,7 @@ public class Product {
 
     @Id
     private String id;
-    @Field(type = FieldType.Text, analyzer = "ngram_analyzer", searchAnalyzer = "ngram_search_analyzer" )
+    @Field(type = FieldType.Text, analyzer = "autocomplete", searchAnalyzer = "autocomplete_search")
     private String title;
 
     public Product(final String id, final String q) {
