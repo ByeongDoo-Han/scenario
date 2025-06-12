@@ -1,0 +1,38 @@
+{
+  "index": {
+    "max_ngram_diff": 19
+  },
+  "analysis": {
+    "tokenizer": {
+      "autocomplete_tokenizer": {
+        "type": "ngram",
+        "min_gram": 1,
+        "max_gram": 13,
+        "token_chars": [
+          "letter",
+          "digit",
+          "whitespace",
+          "punctuation",
+          "symbol"
+        ]
+      }
+    },
+    "analyzer": {
+      "autocomplete": {
+        "type": "custom",
+        "char_filter": ["html_strip"],
+        "tokenizer": "autocomplete_tokenizer",
+        "filter": [
+          "lowercase"
+        ]
+      },
+      "autocomplete_search": {
+        "type": "custom",
+        "tokenizer": "standard",
+        "filter": [
+          "lowercase"
+        ]
+      }
+    }
+  }
+}
