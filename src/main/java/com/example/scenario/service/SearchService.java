@@ -2,7 +2,9 @@ package com.example.scenario.service;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import com.example.scenario.entity.Human;
+import com.example.scenario.entity.HumanPostgres;
 import com.example.scenario.entity.Product;
+import com.example.scenario.repository.HumanPostgresRepository;
 import com.example.scenario.repository.HumanRepository;
 import com.example.scenario.repository.ProductRepository;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -23,6 +25,7 @@ import java.util.*;
 public class SearchService {
     private final ProductRepository productRepository;
     private final HumanRepository humanRepository;
+    private final HumanPostgresRepository humanPostgresRepository;
     private final WebClient webClient;
     public ResponseEntity<List<Product>> searchProduct(String keyword) {
         return ResponseEntity.ok(productRepository.findByTitle(keyword));
@@ -144,5 +147,9 @@ public class SearchService {
 
     public void deleteByHumanName(final String name) {
         humanRepository.deleteByName(name);
+    }
+
+    public HumanPostgres findByName(final String name){
+        return humanPostgresRepository.findByName(name);
     }
 }
