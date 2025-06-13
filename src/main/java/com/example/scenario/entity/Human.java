@@ -1,5 +1,6 @@
 package com.example.scenario.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
