@@ -102,6 +102,7 @@ public class SearchService {
         }
     }
 
+    
     public ResponseEntity<List<Human>> searchAllHuman() {
         String url = "http://localhost:9200/human/_search?size=1000&pretty";
 
