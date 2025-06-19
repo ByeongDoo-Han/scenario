@@ -78,7 +78,7 @@ public class Course {
     }
 
     public Long setQuantity(){
-        return RANDOM.nextLong(1L,20L);
+        return RANDOM.nextLong(900L,999L);
     }
 
     @Builder
