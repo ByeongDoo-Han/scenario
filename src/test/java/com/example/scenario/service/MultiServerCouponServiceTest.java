@@ -57,7 +57,7 @@ class MultiServerCouponServiceTest {
     @Test
     @DisplayName("쿠폰 발급 테스트 (멀티 스레드)")
     void couponIssuanceForMultiThreadTest() throws InterruptedException {
-        Coupon coupon = new Coupon(1L, "abc", 10L);
+        Coupon coupon = new Coupon("abc", 10L);
 
         AtomicInteger successCount = new AtomicInteger();
         int numberOfExecute = 100;
@@ -71,7 +71,7 @@ class MultiServerCouponServiceTest {
             final int threadNumber = i + 1;
             service.submit(() -> {
                 try {
-                    couponService.decrease(1L,1L);
+                    couponService.decrease(1L);
                     successCount.getAndIncrement();
                     System.out.println("Thread " + threadNumber + " - 성공");
                 } catch (PessimisticLockingFailureException e) {

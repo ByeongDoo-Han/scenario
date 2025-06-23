@@ -17,16 +17,19 @@ public class Coupon {
     private Long quantity;
 
     @Builder
-    public Coupon(Long id, String couponName, Long quantity){
-        this.id = id;
+    public Coupon(String couponName, Long quantity){
         this.couponName = couponName;
         this.quantity = quantity;
     }
 
-    public void decrease(Long quantity) {
-        if (this.quantity - quantity < 0) {
-            throw new RuntimeException("쿠폰 재고가 부족합니다.");
+    public void decrease() {
+        validateStockCount();
+        this.quantity -= 1;
+    }
+
+    private void validateStockCount(){
+        if (quantity < 1){
+            throw new IllegalArgumentException();
         }
-        this.quantity -= quantity;
     }
 }
