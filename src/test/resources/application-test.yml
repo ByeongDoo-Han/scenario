@@ -2,15 +2,21 @@ spring:
   application:
     name: scenario
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:scenario;
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: false
-    database: postgresql
+      ddl-auto: create-drop
+    show-sql: true
+    database: h2
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
   elasticsearch:
     uris: http://localhost:9200
   data:

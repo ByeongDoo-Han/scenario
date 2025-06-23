@@ -17,18 +17,18 @@ public class CouponController {
 
     private final CouponService couponService;
 
-    @GetMapping("/coupons")
-    public ResponseEntity<Coupon> getCoupon(){
-        return ResponseEntity.ok(couponService.getCoupon());
-    }
+//    @GetMapping("/coupons")
+//    public ResponseEntity<Coupon> getCoupon(){
+//        return ResponseEntity.ok(couponService.getCoupon());
+//    }
 
-    @PostMapping("/coupons")
-    public ResponseEntity<Coupon> createCoupon(){
-        return ResponseEntity.ok(couponService.createCoupon());
-    }
+//    @PostMapping("/coupons")
+//    public ResponseEntity<Coupon> createCoupon(){
+//        return ResponseEntity.ok(couponService.createCoupon());
+//    }
 
-    @PostMapping("/coupon/{id}")
-    public ResponseEntity<BuyCouponResult> buyCoupon(@PathVariable Long id, @RequestParam Long userId){
-        return ResponseEntity.ok(couponService.buyCoupon(id, userId));
-    }
+//    @PostMapping("/coupon/{id}")
+//    public ResponseEntity<BuyCouponResult> buyCoupon(@PathVariable Long id, @RequestParam Long userId){
+//        return ResponseEntity.ok(couponService.buyCoupon(id, userId));
+//    }
 }
