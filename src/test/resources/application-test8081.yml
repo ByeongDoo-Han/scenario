@@ -37,4 +37,4 @@ server:
   servlet:
     encoding:
       charset: UTF-8
-  port: 8080
+  port: 8081

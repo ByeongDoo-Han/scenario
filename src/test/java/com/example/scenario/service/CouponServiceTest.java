@@ -31,6 +31,7 @@ class CouponServiceTest {
 
     @BeforeEach
     void setUp() {
+        couponRepository.deleteAll();
         Coupon coupon = new Coupon("DEWDEW_001", 100L);
         couponRepository.save(coupon);
     }
@@ -57,7 +58,7 @@ class CouponServiceTest {
                 try {
                     Coupon coupon = couponRepository.findByCouponName("DEWDEW_001");
                     // 분산락 적용 메서드 호출 (락의 key는 쿠폰의 name으로 설정)
-                    couponService.decrease(coupon.getCouponName(), coupon.getId());
+                    couponService.decrease("DEWDEW_001", coupon.getId());
                 } finally {
                     latch.countDown();
                 }
