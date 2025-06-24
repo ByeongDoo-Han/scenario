@@ -33,4 +33,10 @@ public class CouponService {
 
         coupon.decrease();
     }
+
+    public Coupon createCoupon() {
+        Coupon coupon = Coupon.builder().build();
+        couponRepository.save(coupon);
+        return coupon;
+    }
 }

@@ -16,9 +16,11 @@ public class Coupon {
     private String couponName;
     private Long quantity;
 
+    private static final String COUPON_NAME = "10% 할인 쿠폰";
+
     @Builder
     public Coupon(String couponName, Long quantity){
-        this.couponName = couponName;
+        this.couponName = createCouponName();
         this.quantity = quantity;
     }
 
@@ -31,5 +33,9 @@ public class Coupon {
         if (quantity < 1){
             throw new IllegalArgumentException();
         }
+    }
+
+    private String createCouponName(){
+        return COUPON_NAME;
     }
 }

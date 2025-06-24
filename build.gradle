@@ -39,6 +39,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.27.3")
     // https://mvnrepository.com/artifact/com.h2database/h2
     testImplementation("com.h2database:h2:2.2.224")
+    implementation 'com.h2database:h2:2.2.224'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
