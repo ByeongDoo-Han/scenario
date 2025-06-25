@@ -49,7 +49,7 @@ class CouponServiceTest {
     @Test
     @DisplayName("쿠폰차감_분산락_적용_동시성100명_테스트")
     void decrease100() throws InterruptedException {
-        int numberOfThreads = 100;
+        int numberOfThreads = 102;
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
         CountDownLatch latch = new CountDownLatch(numberOfThreads);
 

@@ -1,5 +1,6 @@
 package com.example.scenario.service;
 
+import com.example.scenario.aop.DistributedLock;
 import com.example.scenario.dto.SubmitLectureResult;
 import com.example.scenario.entity.Course;
 import com.example.scenario.repository.CourseRepository;
@@ -44,7 +45,8 @@ public class CourseService {
         return course.getQuantity();
     }
 
-    public synchronized SubmitLectureResult buyCourse(final Long id, final Long userId) {
+    @DistributedLock(key = "#id")
+    public SubmitLectureResult buyCourse(final Long id, final Long userId) {
         Course course = courseRepository.findById(id).orElseThrow(
             () -> new NoSuchElementException("존재하지 않는 강의입니다..")
         );
@@ -59,7 +61,7 @@ public class CourseService {
         }
     }
 
-    public SubmitLectureResult notSyncBuyCourse(final Long id, final Long userId) {
+    public synchronized SubmitLectureResult notSyncBuyCourse(final Long id, final Long userId) {
         Course course = courseRepository.findById(id).orElseThrow(
             () -> new NoSuchElementException("존재하지 않는 강의입니다.")
         );
