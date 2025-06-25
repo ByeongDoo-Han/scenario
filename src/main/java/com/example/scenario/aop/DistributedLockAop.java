@@ -27,11 +27,11 @@ public class DistributedLockAop {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         DistributedLock distributedLock = method.getAnnotation(DistributedLock.class);
-
         String key = REDISSON_LOCK_PREFIX + CustomSpringELParser.getDynamicValue(
             signature.getParameterNames(),
             joinPoint.getArgs(),
             distributedLock.key());
+        System.out.println(key);
         RLock rLock = redissonClient.getLock(key);
 
         try{
@@ -42,7 +42,6 @@ public class DistributedLockAop {
             if(!available){
                 return false;
             }
-
             return aopForTransaction.proceed(joinPoint);
         }catch (InterruptedException e){
             throw new InterruptedException();
