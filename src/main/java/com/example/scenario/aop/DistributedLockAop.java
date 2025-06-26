@@ -31,7 +31,6 @@ public class DistributedLockAop {
             signature.getParameterNames(),
             joinPoint.getArgs(),
             distributedLock.key());
-        System.out.println(key);
         RLock rLock = redissonClient.getLock(key);
 
         try{
