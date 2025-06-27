@@ -50,7 +50,7 @@ public class CouponService {
         return coupon.getQuantity();
     }
 
-    @DistributedLock(key = "#userId")
+    @DistributedLock(key = "#id")
     public SubmitLectureResult buyCoupon(final Long id, final Long userId) {
         Coupon coupon = couponRepository.findById(id).orElseThrow(
             () -> new NoSuchElementException("존재하지 않는 쿠폰입니다..")
