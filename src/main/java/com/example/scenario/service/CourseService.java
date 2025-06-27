@@ -27,10 +27,6 @@ public class CourseService {
         courseRepository.saveAndFlush(course);
     }
 
-    public List<Course> getAllCourse() {
-        return courseRepository.findAll();
-    }
-
     public Course createCourse() {
         Course course = Course.builder()
                 .build();
